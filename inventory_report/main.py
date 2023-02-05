@@ -7,26 +7,23 @@ from inventory_report.importer.xml_importer import XmlImporter
 
 def main():
     if len(sys.argv) != 3:
-        sys.stderr.write("Verifique os argumentos")
-        sys.exit(1)
+        sys.stderr.write("Verifique os argumentos\n")
 
-    path = sys.argv[1]
-    type = sys.argv[2]
-    print(len(sys.argv))
-    formato = path.split("/")[-1].split(".")[-1]
-    objeto = None
+    caminho = sys.argv[1]
+    tipo_relatorio = sys.argv[-1]
+    formato = caminho.split("/")[-1].split(".")[-1]
+
     if formato == "csv":
         objeto = InventoryRefactor(CsvImporter)
+        report = objeto.import_data(caminho, tipo_relatorio)
+        sys.stdout.write(report)
+
     elif formato == "json":
         objeto = InventoryRefactor(JsonImporter)
+        report = objeto.import_data(caminho, tipo_relatorio)
+        sys.stdout.write(report)
+
     elif formato == "xml":
         objeto = InventoryRefactor(XmlImporter)
-
-    report = objeto.import_data(path, type)
-
-    sys.stderr.write(report)
-    sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
+        report = objeto.import_data(caminho, tipo_relatorio)
+        sys.stdout.write(report)
