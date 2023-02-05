@@ -15,5 +15,5 @@ def test_relatorio_produto():
         str(produto.__repr__())
         == "O produto Cafe fabricado em 2020-07-04 por"
         + " Cafes Nature com validade até 2023-02-09 precisa"
-        + " instrucao."
+        + " ser armazenado instrucao."
     )
