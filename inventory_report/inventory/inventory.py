@@ -1,10 +1,8 @@
-import csv
-import json
-import xml.etree.ElementTree as ET
-
-
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
+from inventory_report.importer.csv_importer import CsvImporter
+from inventory_report.importer.json_importer import JsonImporter
+from inventory_report.importer.xml_importer import XmlImporter
 
 
 class ITiposRelatorios:
@@ -14,39 +12,14 @@ class ITiposRelatorios:
 
 class Inventory:
     @classmethod
-    def csv_reader(cls, src: str):
-        with open(src, "r") as file:
-            data = list(csv.DictReader(file))
-            return data
-
-    @classmethod
-    def json_reader(cls, src: str):
-        with open(src, "r") as file:
-            data = list(json.load(file))
-            return data
-
-    @classmethod
-    def xml_reader(cls, src: str):
-        list_test = []
-        with open(src, "r") as file:
-            tree = ET.parse(file)
-            root = tree.getroot()
-        for element in root:
-            dict = {}
-            for child in element:
-                dict[child.tag] = child.text
-            list_test.append(dict)
-        return list_test
-
-    @classmethod
     def import_data(cls, src: str, tipo_relatorio: ITiposRelatorios):
         data = []
         if "csv" in src:
-            data = cls.csv_reader(src)
+            data = CsvImporter().import_data(src)
         if "json" in src:
-            data = cls.json_reader(src)
+            data = JsonImporter().import_data(src)
         if "xml" in src:
-            data = cls.xml_reader(src)
+            data = XmlImporter().import_data(src)
         if tipo_relatorio == "simples":
             return SimpleReport.generate(data)
         else:
