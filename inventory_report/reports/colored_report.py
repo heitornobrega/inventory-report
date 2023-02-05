@@ -1,5 +1,7 @@
 import re
 
+# from simple_report import SimpleReport
+
 
 class ColoredReport:
     def __init__(self, report_type):
@@ -41,3 +43,28 @@ class ColoredReport:
             )
 
         return report
+
+
+# relatorio = ColoredReport(SimpleReport).generate(
+#     [
+#         {
+#             "id": 1,
+#             "nome_do_produto": "Cafe",
+#             "nome_da_empresa": "Cafes Nature",
+#             "data_de_fabricacao": "2020-07-04",
+#             "data_de_validade": "2023-02-09",
+#             "numero_de_serie": "FR48",
+#             "instrucoes_de_armazenamento": "instrucao",
+#         },
+#         {
+#             "id": 2,
+#             "nome_do_produto": "Leite",
+#             "nome_da_empresa": "Leite Monsanto",
+#             "data_de_fabricacao": "2020-07-05",
+#             "data_de_validade": "2030-03-09",
+#             "numero_de_serie": "FR49",
+#             "instrucoes_de_armazenamento": "instrucao",
+#         },
+#     ]
+# )
+# print(relatorio)
